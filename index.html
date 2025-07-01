@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live Audio Mixer</title>
+    <title>Mixer</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -96,7 +96,7 @@
         <div class="grid grid-cols-2 gap-1 mb-1">
             <!-- Channel 1 -->
             <div class="p-0 ui-border flex">
-                <div class="p-2 flex-grow flex flex-col space-y-2">
+                <div class="p-2 flex-grow flex flex-col space-y-1">
                     <div class="flex items-center space-x-2">
                         <h2 class="font-bold tracking-[0.2em] text-xs">CH_1</h2>
                         <select id="deviceSelect1" class="w-full bg-black ui-border px-2 py-1 text-xs focus:outline-none" disabled><option>--INPUT--</option></select>
@@ -109,27 +109,12 @@
                     </div>
                     
                     <div class="flex items-center space-x-2">
-                        <label for="delay1" class="text-xs font-bold w-10 shrink-0">DELAY</label>
-                        <input type="range" id="delay1" min="0" max="100" value="0" class="w-full effect-slider" disabled>
-                        <span id="delay1-val" class="text-xs w-6 text-right shrink-0">0</span>
+                        <label for="fxSend1" class="text-xs font-bold w-10 shrink-0">FX SEND</label>
+                        <input type="range" id="fxSend1" min="0" max="100" value="0" class="w-full effect-slider" disabled>
+                        <span id="fxSend1-val" class="text-xs w-6 text-right shrink-0">0</span>
                     </div>
-
-                    <div class="flex items-center space-x-2">
-                        <label for="delayTime1" class="text-xs w-10 shrink-0">TIME</label>
-                        <input type="range" id="delayTime1" min="50" max="800" value="300" class="w-full effect-slider" disabled>
-                        <span id="delayTime1-val" class="text-xs w-10 text-right shrink-0">300ms</span>
-                    </div>
-                    
-                    <div class="flex items-center space-x-2">
-                        <label for="reverb1" class="text-xs font-bold w-10 shrink-0">REVERB</label>
-                        <input type="range" id="reverb1" min="0" max="100" value="0" class="w-full effect-slider" disabled>
-                        <span id="reverb1-val" class="text-xs w-6 text-right shrink-0">0</span>
-                    </div>
-
-                    <div class="grid grid-cols-2 gap-1 mt-auto pt-1">
-                        <button id="mute1" class="w-full ui-button font-bold py-1 px-2 text-xs tracking-widest" disabled>MUTE</button>
-                        <button id="resetFx1" class="w-full ui-button font-bold py-1 px-2 text-xs tracking-widest" disabled>RESET FX</button>
-                    </div>
+                    <div class="flex-grow"></div>
+                    <button id="mute1" class="w-full ui-button font-bold py-1 px-2 text-xs tracking-widest" disabled>MUTE</button>
                 </div>
                 <canvas id="levelMeter1" class="level-meter ui-border border-l-0"></canvas>
             </div>
@@ -137,7 +122,7 @@
             <!-- Channel 2 -->
             <div class="p-0 ui-border flex">
                 <canvas id="levelMeter2" class="level-meter ui-border border-r-0"></canvas>
-                <div class="p-2 flex-grow flex flex-col space-y-2">
+                <div class="p-2 flex-grow flex flex-col space-y-1">
                      <div class="flex items-center space-x-2">
                         <h2 class="font-bold tracking-[0.2em] text-xs">CH_2</h2>
                         <select id="deviceSelect2" class="w-full bg-black ui-border px-2 py-1 text-xs focus:outline-none" disabled><option>--INPUT--</option></select>
@@ -150,27 +135,12 @@
                     </div>
 
                     <div class="flex items-center space-x-2">
-                        <label for="delay2" class="text-xs font-bold w-10 shrink-0">DELAY</label>
-                        <input type="range" id="delay2" min="0" max="100" value="0" class="w-full effect-slider" disabled>
-                        <span id="delay2-val" class="text-xs w-6 text-right shrink-0">0</span>
+                        <label for="fxSend2" class="text-xs font-bold w-10 shrink-0">FX SEND</label>
+                        <input type="range" id="fxSend2" min="0" max="100" value="0" class="w-full effect-slider" disabled>
+                        <span id="fxSend2-val" class="text-xs w-6 text-right shrink-0">0</span>
                     </div>
-
-                    <div class="flex items-center space-x-2">
-                        <label for="delayTime2" class="text-xs w-10 shrink-0">TIME</label>
-                        <input type="range" id="delayTime2" min="50" max="800" value="300" class="w-full effect-slider" disabled>
-                        <span id="delayTime2-val" class="text-xs w-10 text-right shrink-0">300ms</span>
-                    </div>
-
-                    <div class="flex items-center space-x-2">
-                        <label for="reverb2" class="text-xs font-bold w-10 shrink-0">REVERB</label>
-                        <input type="range" id="reverb2" min="0" max="100" value="0" class="w-full effect-slider" disabled>
-                        <span id="reverb2-val" class="text-xs w-6 text-right shrink-0">0</span>
-                    </div>
-
-                    <div class="grid grid-cols-2 gap-1 mt-auto pt-1">
-                        <button id="mute2" class="w-full ui-button font-bold py-1 px-2 text-xs tracking-widest" disabled>MUTE</button>
-                        <button id="resetFx2" class="w-full ui-button font-bold py-1 px-2 text-xs tracking-widest" disabled>RESET FX</button>
-                    </div>
+                    <div class="flex-grow"></div>
+                    <button id="mute2" class="w-full ui-button font-bold py-1 px-2 text-xs tracking-widest" disabled>MUTE</button>
                 </div>
             </div>
         </div>
@@ -180,7 +150,7 @@
             <div class="crossfader-container py-1">
                 <input id="crossfader" type="range" min="0" max="100" value="50" class="w-full" disabled>
             </div>
-            <div id="master-fx" class="space-y-2 p-2 ui-border">
+            <div id="master-fx" class="space-y-1 p-2 ui-border">
                 <div class="flex items-center space-x-2">
                     <label for="masterDelay" class="text-xs font-bold w-10 shrink-0">DELAY</label>
                     <input type="range" id="masterDelay" min="0" max="100" value="0" class="w-full effect-slider" disabled>
@@ -197,9 +167,8 @@
                     <span id="masterReverb-val" class="text-xs w-6 text-right shrink-0">0</span>
                 </div>
             </div>
-             <div class="grid grid-cols-3 gap-1">
+             <div class="grid grid-cols-2 gap-1">
                 <button id="startStopBtn" class="ui-button font-bold py-1 text-xs tracking-widest">CONNECT</button>
-                <button id="masterResetFxBtn" class="ui-button font-bold py-1 text-xs tracking-widest" disabled>RESET MASTER FX</button>
                 <select id="outputDeviceSelect" class="w-full bg-black ui-border px-2 py-1 text-xs focus:outline-none" disabled><option>--OUTPUT--</option></select>
             </div>
         </div>
@@ -214,8 +183,8 @@
         // --- Web Audio API Setup ---
         let audioContext;
         let isInitialized = false;
-        let source1, volumeGain1, delay1Node, delay1Wet, reverb1Node, reverb1Wet, crossfadeGain1, analyser1;
-        let source2, volumeGain2, delay2Node, delay2Wet, reverb2Node, reverb2Wet, crossfadeGain2, analyser2;
+        let source1, volumeGain1, fxSend1, crossfadeGain1, analyser1;
+        let source2, volumeGain2, fxSend2, crossfadeGain2, analyser2;
         let masterDelayNode, masterDelayWet, masterReverbNode, masterReverbWet, masterPreFxGain, masterOut;
         let animationFrameId;
 
@@ -225,20 +194,13 @@
             deviceSelect2: document.getElementById('deviceSelect2'),
             outputDeviceSelect: document.getElementById('outputDeviceSelect'),
             startStopBtn: document.getElementById('startStopBtn'),
-            masterResetFxBtn: document.getElementById('masterResetFxBtn'),
-            resetFx1: document.getElementById('resetFx1'),
-            resetFx2: document.getElementById('resetFx2'),
             crossfader: document.getElementById('crossfader'),
             volume1: document.getElementById('volume1'),
             volume2: document.getElementById('volume2'),
             mute1: document.getElementById('mute1'),
             mute2: document.getElementById('mute2'),
-            delay1: document.getElementById('delay1'),
-            reverb1: document.getElementById('reverb1'),
-            delayTime1: document.getElementById('delayTime1'),
-            delay2: document.getElementById('delay2'),
-            reverb2: document.getElementById('reverb2'),
-            delayTime2: document.getElementById('delayTime2'),
+            fxSend1: document.getElementById('fxSend1'),
+            fxSend2: document.getElementById('fxSend2'),
             masterOutput: document.getElementById('masterOutput'),
             levelMeter1: document.getElementById('levelMeter1'),
             levelMeter2: document.getElementById('levelMeter2'),
@@ -247,13 +209,9 @@
             masterDelayTime: document.getElementById('masterDelayTime'),
             // Value displays
             volume1Val: document.getElementById('volume1-val'),
-            delay1Val: document.getElementById('delay1-val'),
-            delayTime1Val: document.getElementById('delayTime1-val'),
-            reverb1Val: document.getElementById('reverb1-val'),
+            fxSend1Val: document.getElementById('fxSend1-val'),
             volume2Val: document.getElementById('volume2-val'),
-            delay2Val: document.getElementById('delay2-val'),
-            delayTime2Val: document.getElementById('delayTime2-val'),
-            reverb2Val: document.getElementById('reverb2-val'),
+            fxSend2Val: document.getElementById('fxSend2-val'),
             masterDelayVal: document.getElementById('masterDelay-val'),
             masterReverbVal: document.getElementById('masterReverb-val'),
             masterDelayTimeVal: document.getElementById('masterDelayTime-val'),
@@ -266,12 +224,15 @@
                 const audioContextOptions = { latencyHint: 'interactive' };
                 audioContext = new (window.AudioContext || window.webkitAudioContext)(audioContextOptions);
                 
-                [volumeGain1, delay1Node, delay1Wet, reverb1Node, reverb1Wet, crossfadeGain1, analyser1] = createChannelGraph();
-                [volumeGain2, delay2Node, delay2Wet, reverb2Node, reverb2Wet, crossfadeGain2, analyser2] = createChannelGraph();
+                [volumeGain1, fxSend1, crossfadeGain1, analyser1] = createChannelGraph();
+                [volumeGain2, fxSend2, crossfadeGain2, analyser2] = createChannelGraph();
                 [masterPreFxGain, masterDelayNode, masterDelayWet, masterReverbNode, masterReverbWet, masterOut] = createMasterFxGraph();
 
-                crossfadeGain1.connect(masterPreFxGain);
-                crossfadeGain2.connect(masterPreFxGain);
+                fxSend1.connect(masterPreFxGain);
+                fxSend2.connect(masterPreFxGain);
+
+                crossfadeGain1.connect(masterOut);
+                crossfadeGain2.connect(masterOut);
 
                 const masterDestination = audioContext.createMediaStreamDestination();
                 masterOut.connect(masterDestination);
@@ -280,8 +241,6 @@
                 await allDOMElements.masterOutput.play();
                 
                 const impulse = generateImpulseResponse();
-                reverb1Node.buffer = impulse;
-                reverb2Node.buffer = impulse;
                 masterReverbNode.buffer = impulse;
 
                 await navigator.mediaDevices.getUserMedia({ 
@@ -294,7 +253,6 @@
                 await populateInputDeviceLists();
                 await populateOutputDeviceList();
 
-                // BUG FIX: Explicitly set the initial output device
                 if (allDOMElements.outputDeviceSelect.value) {
                     await changeOutputDevice(allDOMElements.outputDeviceSelect.value);
                 }
@@ -318,32 +276,18 @@
 
         function createChannelGraph() {
             const volume = audioContext.createGain();
-            const delay = audioContext.createDelay(10.0);
-            const delayWet = audioContext.createGain();
-            const reverb = audioContext.createConvolver();
-            const reverbWet = audioContext.createGain();
+            const fxSend = audioContext.createGain();
             const crossfade = audioContext.createGain();
-            const feedback = audioContext.createGain();
             const analyser = audioContext.createAnalyser();
             analyser.fftSize = 256;
             analyser.smoothingTimeConstant = 0.8;
 
-            feedback.gain.value = 0.7;
-            delayWet.gain.value = 0; 
-            reverbWet.gain.value = 0;
+            fxSend.gain.value = 0;
 
-            volume.connect(delay);
-            delay.connect(feedback);
-            feedback.connect(delay);
-            volume.connect(reverb);
-            delay.connect(delayWet);
-            reverb.connect(reverbWet);
+            volume.connect(crossfade); // Dry path
+            volume.connect(fxSend);     // Wet path (to master FX)
             
-            volume.connect(crossfade);
-            delayWet.connect(crossfade);
-            reverbWet.connect(crossfade);
-
-            return [volume, delay, delayWet, reverb, reverbWet, crossfade, analyser];
+            return [volume, fxSend, crossfade, analyser];
         }
 
         function createMasterFxGraph() {
@@ -366,10 +310,9 @@
 
             preFx.connect(reverb);
             reverb.connect(reverbWet);
-
-            preFx.connect(out); // Dry
-            delayWet.connect(out); // Wet Delay
-            reverbWet.connect(out); // Wet Reverb
+            
+            delayWet.connect(out); 
+            reverbWet.connect(out);
 
             return [preFx, delay, delayWet, reverb, reverbWet, out];
         }
@@ -406,6 +349,7 @@
                 btn.classList.remove('muted');
                 btn.dataset.muted = 'false';
             });
+            
             if (allDOMElements.masterOutput.srcObject) {
                 allDOMElements.masterOutput.srcObject.getTracks().forEach(track => track.stop());
                 allDOMElements.masterOutput.srcObject = null;
@@ -419,12 +363,12 @@
 
         function generateImpulseResponse() {
             const sampleRate = audioContext.sampleRate;
-            const length = sampleRate * 6;
+            const length = sampleRate * 2.5; 
             const impulse = audioContext.createBuffer(2, length, sampleRate);
             for (let channel = 0; channel < 2; channel++) {
                 const channelData = impulse.getChannelData(channel);
                 for (let i = 0; i < length; i++) {
-                    channelData[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / length, 4.5);
+                    channelData[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / length, 2.5);
                 }
             }
             return impulse;
@@ -435,9 +379,6 @@
 
         // --- Event Listeners ---
         allDOMElements.startStopBtn.addEventListener('click', () => isInitialized ? stopMixer() : initializeMixer());
-        allDOMElements.masterResetFxBtn.addEventListener('click', resetMasterEffects);
-        allDOMElements.resetFx1.addEventListener('click', () => resetChannelEffects(1));
-        allDOMElements.resetFx2.addEventListener('click', () => resetChannelEffects(2));
         allDOMElements.deviceSelect1.addEventListener('change', (e) => setupChannel(1, e.target.value));
         allDOMElements.deviceSelect2.addEventListener('change', (e) => setupChannel(2, e.target.value));
         allDOMElements.outputDeviceSelect.addEventListener('change', (e) => changeOutputDevice(e.target.value));
@@ -448,28 +389,6 @@
         allDOMElements.mute2.addEventListener('click', () => toggleMute(2));
 
         // --- Functions ---
-        function resetChannelEffects(channelNum) {
-            if (!isInitialized) return;
-            if (channelNum === 1) {
-                allDOMElements.delay1.value = 0;
-                allDOMElements.reverb1.value = 0;
-                allDOMElements.delayTime1.value = 300;
-            } else {
-                allDOMElements.delay2.value = 0;
-                allDOMElements.reverb2.value = 0;
-                allDOMElements.delayTime2.value = 300;
-            }
-            updateAudioParams();
-        }
-
-        function resetMasterEffects() {
-            if (!isInitialized) return;
-            allDOMElements.masterDelay.value = 0;
-            allDOMElements.masterReverb.value = 0;
-            allDOMElements.masterDelayTime.value = 300;
-            updateAudioParams();
-        }
-
         async function setupChannel(channelNum, deviceId) {
             if (!deviceId || !isInitialized) return;
             try {
@@ -495,28 +414,13 @@
             } catch (err) { console.error(err); }
         }
         
-        async function changeOutputDevice(deviceId) {
-            if (!isInitialized) return;
-            try {
-                await allDOMElements.masterOutput.setSinkId(deviceId);
-                const selectedOption = allDOMElements.outputDeviceSelect.querySelector(`option[value="${deviceId}"]`);
-                const deviceName = selectedOption ? selectedOption.textContent : 'device';
-                showMessage(`Output: ${deviceName}`, false);
-            } catch (err) {
-                 console.error('Failed to set output device:', err);
-                 showMessage(`Error: ${err.message}`);
-            }
-        }
+        async function changeOutputDevice(deviceId) { /* Unchanged */ }
 
         function updateValueDisplays() {
             allDOMElements.volume1Val.textContent = allDOMElements.volume1.value;
-            allDOMElements.delay1Val.textContent = allDOMElements.delay1.value;
-            allDOMElements.delayTime1Val.textContent = `${allDOMElements.delayTime1.value}ms`;
-            allDOMElements.reverb1Val.textContent = allDOMElements.reverb1.value;
+            allDOMElements.fxSend1Val.textContent = allDOMElements.fxSend1.value;
             allDOMElements.volume2Val.textContent = allDOMElements.volume2.value;
-            allDOMElements.delay2Val.textContent = allDOMElements.delay2.value;
-            allDOMElements.delayTime2Val.textContent = `${allDOMElements.delayTime2.value}ms`;
-            allDOMElements.reverb2Val.textContent = allDOMElements.reverb2.value;
+            allDOMElements.fxSend2Val.textContent = allDOMElements.fxSend2.value;
             allDOMElements.masterDelayVal.textContent = allDOMElements.masterDelay.value;
             allDOMElements.masterDelayTimeVal.textContent = `${allDOMElements.masterDelayTime.value}ms`;
             allDOMElements.masterReverbVal.textContent = allDOMElements.masterReverb.value;
@@ -528,14 +432,10 @@
             updateValueDisplays();
 
             volumeGain1.gain.setValueAtTime(allDOMElements.mute1.dataset.muted === 'true' ? 0 : allDOMElements.volume1.value / 100, audioContext.currentTime);
-            delay1Wet.gain.setValueAtTime(allDOMElements.delay1.value / 100, audioContext.currentTime);
-            delay1Node.delayTime.setValueAtTime(allDOMElements.delayTime1.value / 1000, audioContext.currentTime);
-            reverb1Wet.gain.setValueAtTime(allDOMElements.reverb1.value / 100, audioContext.currentTime);
+            fxSend1.gain.setValueAtTime(allDOMElements.fxSend1.value / 100, audioContext.currentTime);
 
             volumeGain2.gain.setValueAtTime(allDOMElements.mute2.dataset.muted === 'true' ? 0 : allDOMElements.volume2.value / 100, audioContext.currentTime);
-            delay2Wet.gain.setValueAtTime(allDOMElements.delay2.value / 100, audioContext.currentTime);
-            delay2Node.delayTime.setValueAtTime(allDOMElements.delayTime2.value / 1000, audioContext.currentTime);
-            reverb2Wet.gain.setValueAtTime(allDOMElements.reverb2.value / 100, audioContext.currentTime);
+            fxSend2.gain.setValueAtTime(allDOMElements.fxSend2.value / 100, audioContext.currentTime);
 
             const faderValue = allDOMElements.crossfader.value / 100;
             crossfadeGain1.gain.setValueAtTime(Math.cos(faderValue * 0.5 * Math.PI), audioContext.currentTime);
@@ -611,6 +511,11 @@
                 if (d.deviceId === 'default') opt.textContent = '--DEFAULT OUTPUT--';
                 allDOMElements.outputDeviceSelect.appendChild(opt);
             });
+        }
+        async function changeOutputDevice(deviceId) {
+            if (!isInitialized) return;
+            try { await allDOMElements.masterOutput.setSinkId(deviceId); } 
+            catch (err) { console.error(err); }
         }
         function toggleMute(channelNum) {
             if (!isInitialized) return;
