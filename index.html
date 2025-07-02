@@ -185,7 +185,7 @@
         let isInitialized = false;
         let source1, volumeGain1, fxSend1, crossfadeGain1, analyser1;
         let source2, volumeGain2, fxSend2, crossfadeGain2, analyser2;
-        let masterDelayNode, masterDelayWet, masterReverbNode, masterReverbWet, masterPreFxGain, masterOut;
+        let masterDelayNode, masterDelayWet, masterReverbNode, masterReverbWet, masterFxBus, masterDryGain, masterOut;
         let animationFrameId;
 
         // --- DOM Elements ---
@@ -226,13 +226,20 @@
                 
                 [volumeGain1, fxSend1, crossfadeGain1, analyser1] = createChannelGraph();
                 [volumeGain2, fxSend2, crossfadeGain2, analyser2] = createChannelGraph();
-                [masterPreFxGain, masterDelayNode, masterDelayWet, masterReverbNode, masterReverbWet, masterOut] = createMasterFxGraph();
+                [masterFxBus, masterDelayNode, masterDelayWet, masterReverbNode, masterReverbWet, masterDryGain, masterOut] = createMasterGraph();
 
-                fxSend1.connect(masterPreFxGain);
-                fxSend2.connect(masterPreFxGain);
+                // Connect channel FX sends to the master FX bus
+                fxSend1.connect(masterFxBus);
+                fxSend2.connect(masterFxBus);
 
-                crossfadeGain1.connect(masterOut);
-                crossfadeGain2.connect(masterOut);
+                // Connect dry signals to the master dry gain
+                crossfadeGain1.connect(masterDryGain);
+                crossfadeGain2.connect(masterDryGain);
+
+                // Connect master dry and wet paths to the final output
+                masterDryGain.connect(masterOut);
+                masterDelayWet.connect(masterOut);
+                masterReverbWet.connect(masterOut);
 
                 const masterDestination = audioContext.createMediaStreamDestination();
                 masterOut.connect(masterDestination);
@@ -284,37 +291,35 @@
 
             fxSend.gain.value = 0;
 
-            volume.connect(crossfade); // Dry path
-            volume.connect(fxSend);     // Wet path (to master FX)
+            volume.connect(crossfade);
+            volume.connect(fxSend);
             
             return [volume, fxSend, crossfade, analyser];
         }
 
-        function createMasterFxGraph() {
-            const preFx = audioContext.createGain();
+        function createMasterGraph() {
+            const fxBus = audioContext.createGain();
             const delay = audioContext.createDelay(10.0);
             const delayWet = audioContext.createGain();
             const reverb = audioContext.createConvolver();
             const reverbWet = audioContext.createGain();
             const feedback = audioContext.createGain();
+            const dry = audioContext.createGain();
             const out = audioContext.createGain();
 
             feedback.gain.value = 0.7;
             delayWet.gain.value = 0;
             reverbWet.gain.value = 0;
 
-            preFx.connect(delay);
+            fxBus.connect(delay);
             delay.connect(feedback);
             feedback.connect(delay);
             delay.connect(delayWet);
 
-            preFx.connect(reverb);
+            fxBus.connect(reverb);
             reverb.connect(reverbWet);
-            
-            delayWet.connect(out); 
-            reverbWet.connect(out);
 
-            return [preFx, delay, delayWet, reverb, reverbWet, out];
+            return [fxBus, delay, delayWet, reverb, reverbWet, dry, out];
         }
         
         function stopMixer() {
@@ -441,9 +446,16 @@
             crossfadeGain1.gain.setValueAtTime(Math.cos(faderValue * 0.5 * Math.PI), audioContext.currentTime);
             crossfadeGain2.gain.setValueAtTime(Math.cos((1.0 - faderValue) * 0.5 * Math.PI), audioContext.currentTime);
             
-            masterDelayWet.gain.setValueAtTime(allDOMElements.masterDelay.value / 100, audioContext.currentTime);
+            const masterDelayAmount = allDOMElements.masterDelay.value / 100;
+            const masterReverbAmount = allDOMElements.masterReverb.value / 100;
+            const totalWetAmount = Math.min(1.0, masterDelayAmount + masterReverbAmount); // Prevent gain > 1
+
+            masterDelayWet.gain.setValueAtTime(masterDelayAmount, audioContext.currentTime);
             masterDelayNode.delayTime.setValueAtTime(allDOMElements.masterDelayTime.value / 1000, audioContext.currentTime);
-            masterReverbWet.gain.setValueAtTime(allDOMElements.masterReverb.value / 100, audioContext.currentTime);
+            masterReverbWet.gain.setValueAtTime(masterReverbAmount, audioContext.currentTime);
+
+            // Attenuate dry signal as wet signal increases to maintain volume
+            masterDryGain.gain.setValueAtTime(1.0 - (totalWetAmount * 0.5), audioContext.currentTime);
         }
 
         function toggleMute(channelNum) { /* Unchanged */ }
